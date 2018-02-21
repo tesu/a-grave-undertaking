@@ -49,3 +49,9 @@ UnityPackageManager/
 *.tif filter=lfs diff=lfs merge=lfs -text
 *.tiff filter=lfs diff=lfs merge=lfs -text
 
+*.csproj
+*.sln
+*.ide-wal
+*.ide-shm
+*.ide
+*.lock
