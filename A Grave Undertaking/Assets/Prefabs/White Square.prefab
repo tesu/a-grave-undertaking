@@ -21,13 +21,26 @@ GameObject:
   - component: {fileID: 224237390944458736}
   - component: {fileID: 222278115700905594}
   - component: {fileID: 114906225294983252}
+  - component: {fileID: 114298573829300634}
   m_Layer: 5
   m_Name: White Square
-  m_TagString: Untagged
+  m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114298573829300634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1699503726316680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203eaf5bc8bfb954a80a067b5ac89d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OriginalColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &114906225294983252
 MonoBehaviour:
   m_ObjectHideFlags: 1
