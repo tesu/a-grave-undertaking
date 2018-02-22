@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public GameObject BlackCellPrefab;
     public GameObject BoardPanel;
     public Raycaster raycaster;
+    public Color HighlightColor;
 
     private int boardSize = 8;
     private Board board;
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 GameObject cell;
-                if ((i + j%2) % 2 == 0) {
+                if ((i + j % 2) % 2 == 0) {
                     cell = Instantiate(WhiteCellPrefab);
                 }
                 else {
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
         List<RaycastResult> raycastResults = raycaster.GetAllRaycastObjects();
         GameObject resultCell = null;
         foreach (RaycastResult result in raycastResults) {
@@ -42,12 +44,37 @@ public class GameManager : MonoBehaviour {
                 resultCell = result.gameObject;
             }
         }
+
+
         if (resultCell != null) {
-            resultCell.GetComponent<Image>().color = Color.green;
-            if (highlightedCell != null && !highlightedCell.gameObject.Equals(resultCell.gameObject)) {
-                highlightedCell.GetComponent<Image>().color = highlightedCell.GetComponent<Cell>().OriginalColor;
-            }
+            DeHighlightCell();
             highlightedCell = resultCell;
+        }
+        else {
+            DeHighlightCell();
+            highlightedCell = null;
+        }
+        HighlightCell();
+
+        if (Input.GetKeyDown(KeyCode.Mouse0)) {
+            if (highlightedCell != null) {
+                Debug.Log(board.GetCellX(highlightedCell) + ", " + board.GetCellY(highlightedCell));
+            }
+            else {
+                Debug.Log("No Cell");
+            }
+        }
+    }
+
+    void DeHighlightCell() {
+        if (highlightedCell != null) {
+            highlightedCell.GetComponent<Image>().color = highlightedCell.GetComponent<Cell>().OriginalColor;
+        }
+    }
+
+    void HighlightCell() {
+        if (highlightedCell != null) {
+            highlightedCell.GetComponent<Image>().color = HighlightColor;
         }
     }
 }
