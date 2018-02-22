@@ -11,11 +11,13 @@ public class GameManager : MonoBehaviour {
     public GameObject BoardPanel;
     public Raycaster raycaster;
     public Color HighlightColor;
+    public Color ClickedColor;
     public Text InfoText;
 
     private int boardSize = StaticVariables.BoardSize;
     private Board board;
     private GameObject highlightedCell;
+    private bool clickedCell;
 
 	// Use this for initialization
 	void Start () {
@@ -60,6 +62,7 @@ public class GameManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             if (highlightedCell != null) {
+                clickedCell = true;
                 string info = (board.GetCellX(highlightedCell) + 1) + ", " + (board.GetCellY(highlightedCell) + 1);
                 Debug.Log(info);
                 SetInfoText("You clicked square: " + info);
@@ -68,6 +71,10 @@ public class GameManager : MonoBehaviour {
                 Debug.Log("No Cell");
                 SetInfoText("You didn't click a square");
             }
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0)) {
+            clickedCell = false;
         }
     }
 
@@ -79,7 +86,9 @@ public class GameManager : MonoBehaviour {
 
     void HighlightCell() {
         if (highlightedCell != null) {
-            highlightedCell.GetComponent<Image>().color = HighlightColor;
+            Color color = HighlightColor;
+            if (clickedCell) color = ClickedColor;
+            highlightedCell.GetComponent<Image>().color = color;
         }
     }
 
