@@ -11,8 +11,9 @@ public class GameManager : MonoBehaviour {
     public GameObject BoardPanel;
     public Raycaster raycaster;
     public Color HighlightColor;
+    public Text InfoText;
 
-    private int boardSize = 8;
+    private int boardSize = StaticVariables.BoardSize;
     private Board board;
     private GameObject highlightedCell;
 
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour {
                 board.AddCell(cell);
             }
         }
+        SetInfoText("Welcome!");
 	}
 
     // Update is called once per frame
@@ -58,10 +60,13 @@ public class GameManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             if (highlightedCell != null) {
-                Debug.Log(board.GetCellX(highlightedCell) + ", " + board.GetCellY(highlightedCell));
+                string info = (board.GetCellX(highlightedCell) + 1) + ", " + (board.GetCellY(highlightedCell) + 1);
+                Debug.Log(info);
+                SetInfoText("You clicked square: " + info);
             }
             else {
                 Debug.Log("No Cell");
+                SetInfoText("You didn't click a square");
             }
         }
     }
@@ -76,5 +81,9 @@ public class GameManager : MonoBehaviour {
         if (highlightedCell != null) {
             highlightedCell.GetComponent<Image>().color = HighlightColor;
         }
+    }
+
+    void SetInfoText(string text) {
+        InfoText.text = "<color=white><size=30>" + text + "</size></color>";
     }
 }
