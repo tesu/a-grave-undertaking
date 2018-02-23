@@ -24,27 +24,13 @@ public class GameManager : MonoBehaviour {
     private int boardSize = StaticVariables.BoardSize;
     private Board board;
     private GameObject highlightedCell;
+    private GameObject selectedCell;
     private bool clicked;
 
 	// Use this for initialization
 	void Start () {
-        board = new Board();
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
-                GameObject cell;
-                if ((i + j % 2) % 2 == 0) {
-                    cell = Instantiate(WhiteCellPrefab);
-                }
-                else {
-                    cell = Instantiate(BlackCellPrefab);
-                }
-                cell.transform.SetParent(BoardPanel.transform);
-                board.AddCell(cell);
-            }
-        }
-        SetInfoText("Welcome!");
-        SetTurnText();
-        FinishButton.onClick.AddListener(OnFinishButtonClick);
+        InitUI();
+        
 	}
 
     // Update is called once per frame
@@ -60,23 +46,27 @@ public class GameManager : MonoBehaviour {
 
 
         if (resultCell != null) {
-            DeHighlightCell();
+            DeHighlightCell(false);
             highlightedCell = resultCell;
         }
         else {
-            DeHighlightCell();
+            DeHighlightCell(false);
             highlightedCell = null;
         }
-        HighlightCell();
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             if (highlightedCell != null) {
                 clicked = true;
+                selectedCell = highlightedCell;
                 string info = (board.GetCellX(highlightedCell) + 1) + ", " + (board.GetCellY(highlightedCell) + 1);
                 Debug.Log(info);
                 SetInfoText("You clicked square: " + info);
             }
             else {
+                if (selectedCell != null) {
+                    DeHighlightCell(true);
+                    selectedCell = null;
+                }
                 Debug.Log("No Cell");
                 SetInfoText("You didn't click a square");
             }
@@ -84,6 +74,37 @@ public class GameManager : MonoBehaviour {
 
         if (Input.GetKeyUp(KeyCode.Mouse0)) {
             clicked = false;
+        }
+
+        HighlightCell();
+    }
+
+    void InitUI() {
+        InitBoard();
+
+        SetInfoText("Welcome!");
+        SetTurnText();
+
+        AttackButton.onClick.AddListener(OnAttackButtonClick);
+        MoveButton.onClick.AddListener(OnMoveButtonClick);
+        DigButton.onClick.AddListener(OnDigButtonClick);
+        FinishButton.onClick.AddListener(OnFinishButtonClick);
+    }
+
+    void InitBoard() {
+        board = new Board();
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                GameObject cell;
+                if ((i + j % 2) % 2 == 0) {
+                    cell = Instantiate(WhiteCellPrefab);
+                }
+                else {
+                    cell = Instantiate(BlackCellPrefab);
+                }
+                cell.transform.SetParent(BoardPanel.transform);
+                board.AddCell(cell);
+            }
         }
     }
 
@@ -102,20 +123,23 @@ public class GameManager : MonoBehaviour {
     void OnFinishButtonClick() {
         Player1Turn = !Player1Turn;
         SetTurnText();
-        Debug.Log("clicked");
     }
 
-    void DeHighlightCell() {
+    void DeHighlightCell(bool dehighlightSelected) {
         if (highlightedCell != null) {
             highlightedCell.GetComponent<Image>().color = highlightedCell.GetComponent<Cell>().OriginalColor;
+        }
+        if (dehighlightSelected && selectedCell != null) {
+            selectedCell.GetComponent<Image>().color = selectedCell.GetComponent<Cell>().OriginalColor;
         }
     }
 
     void HighlightCell() {
         if (highlightedCell != null) {
-            Color color = HighlightColor;
-            if (clicked) color = ClickedColor;
-            highlightedCell.GetComponent<Image>().color = color;
+            highlightedCell.GetComponent<Image>().color = HighlightColor;
+        }
+        if (selectedCell != null) {
+            selectedCell.GetComponent<Image>().color = ClickedColor;
         }
     }
 
