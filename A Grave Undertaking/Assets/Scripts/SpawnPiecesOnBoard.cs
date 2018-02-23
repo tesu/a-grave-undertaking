@@ -19,13 +19,13 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         // This start will run after GameManager (Edit, Proj Settings, Script Exe Order)
         board = gameManager.GetComponent<GameManager>().board;
         boardPanel = gameManager.GetComponent<GameManager>().BoardPanel;
-        SpawnPiece(3, 5);
+        SpawnPiece(5, 4);
     }
 
     // This will have a third argument with the type of piece to spawn
     void SpawnPiece(int xCoord, int yCoord)
     {
-        GameObject spawnInCell = board.GetCell(xCoord, yCoord);
-        GameObject newPiece = Instantiate(Pawn, spawnInCell.transform.position, Quaternion.identity, spawnInCell.transform);
+        GameObject spawnInCell = board.GetCell(xCoord - 1, yCoord - 1);
+        GameObject newPiece = Instantiate(Pawn, spawnInCell.transform);
     }
 }

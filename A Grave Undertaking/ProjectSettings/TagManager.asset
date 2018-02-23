@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Cell
+  - Player1
+  - Player2
+  - Neutral
   layers:
   - Default
   - TransparentFX

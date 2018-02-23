@@ -1100,6 +1100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1135600665}
   - component: {fileID: 1135600664}
+  - component: {fileID: 1135600666}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1147,6 +1148,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1135600666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1135600663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9edd4d7935178414e8efc25baf7be3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 1135600663}
+  boardPanel: {fileID: 824361072}
+  Pawn: {fileID: 1901647981631510, guid: 929f0199e2b5d7648900c72008223641, type: 2}
+  King: {fileID: 0}
+  Knight: {fileID: 0}
+  Bishop: {fileID: 0}
 --- !u!1 &1466585917
 GameObject:
   m_ObjectHideFlags: 0
