@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             if (highlightedCell != null) {
                 clicked = true;
+                DeHighlightCell(true);
                 selectedCell = highlightedCell;
                 string info = (board.GetCellX(highlightedCell) + 1) + ", " + (board.GetCellY(highlightedCell) + 1);
                 Debug.Log(info);
@@ -76,8 +77,8 @@ public class GameManager : MonoBehaviour {
                 }
             }
             else {
+                DeHighlightCell(true);
                 if (selectedCell != null) {
-                    DeHighlightCell(true);
                     selectedCell = null;
                 }
                 Debug.Log("No Cell");
