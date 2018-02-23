@@ -22,9 +22,10 @@ public class GameManager : MonoBehaviour {
     public bool Player1Turn;
 
     private int boardSize = StaticVariables.BoardSize;
-    private Board board;
+    public Board board;
     private GameObject highlightedCell;
     private GameObject selectedCell;
+    private Transform selectedPiece;
     private bool clicked;
 
 	// Use this for initialization
@@ -61,6 +62,18 @@ public class GameManager : MonoBehaviour {
                 string info = (board.GetCellX(highlightedCell) + 1) + ", " + (board.GetCellY(highlightedCell) + 1);
                 Debug.Log(info);
                 SetInfoText("You clicked square: " + info);
+                if (selectedPiece)
+                {
+                    Debug.Log("Moving piece");
+                    selectedPiece.transform.parent = highlightedCell.transform;
+                    selectedPiece.transform.position = highlightedCell.transform.position;
+                    selectedPiece = null;
+                }
+                else if (highlightedCell.transform.childCount > 0) // Any pieces on this cell?
+                {
+                    // This assumes 1 child for now for simplicity
+                    selectedPiece = highlightedCell.transform.GetChild(0);
+                }
             }
             else {
                 if (selectedCell != null) {
