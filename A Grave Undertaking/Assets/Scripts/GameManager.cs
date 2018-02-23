@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
     public bool Player1Turn;
 
     private int boardSize = StaticVariables.BoardSize;
-    private Board board;
+    public Board board;
     private GameObject highlightedCell;
     private bool clicked;
 
