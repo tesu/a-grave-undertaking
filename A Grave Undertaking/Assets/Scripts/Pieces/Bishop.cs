@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pawn : Piece {
-
-    public int maxMovement;
+public class Bishop : Pawn {
 
 	void Start ()
     {
-        maxMovement = 1;
-        canResurrect = false;
+        maxMovement = 100;
+        canResurrect = true;
         turnIsOver = true;
-	}
+    }
 }

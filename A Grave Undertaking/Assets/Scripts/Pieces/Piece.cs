@@ -6,11 +6,16 @@ public class Piece : MonoBehaviour {
 
     public int xCoord;
     public int yCoord;
-    public string playerTag;
-    public bool canMove;
+    public bool turnIsOver;
+    public bool canResurrect;
+
+    void Start()
+    {
+        UpdateCoordinates();
+    }
 
     void UpdateCoordinates()
     {
-
+        // Get x and y of current occupied tile
     }
 }

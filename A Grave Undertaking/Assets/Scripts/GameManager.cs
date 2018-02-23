@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
     public Board board;
     private GameObject highlightedCell;
     private GameObject selectedCell;
-    private Transform selectedPiece;
+    public Transform selectedPiece;
     private bool clicked;
 
 	// Use this for initialization

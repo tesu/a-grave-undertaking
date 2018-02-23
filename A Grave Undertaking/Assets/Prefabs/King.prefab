@@ -9,35 +9,35 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1901647981631510}
+  m_RootGameObject: {fileID: 1442769004622596}
   m_IsPrefabParent: 1
---- !u!1 &1901647981631510
+--- !u!1 &1442769004622596
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224971590668666056}
-  - component: {fileID: 222747156962718732}
-  - component: {fileID: 114289283048687070}
-  - component: {fileID: 114127804157319840}
+  - component: {fileID: 224532908245498440}
+  - component: {fileID: 222693896621114470}
+  - component: {fileID: 114574646797538670}
+  - component: {fileID: 114532720006671502}
   m_Layer: 5
-  m_Name: Pawn
+  m_Name: King
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114127804157319840
+--- !u!114 &114532720006671502
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1901647981631510}
+  m_GameObject: {fileID: 1442769004622596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8502e1452efe1d45aa342888bc137e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0faf0a71590e7b440bd59a9febb578dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   xCoord: 0
@@ -45,19 +45,19 @@ MonoBehaviour:
   turnIsOver: 0
   maxMovement: 0
   canResurrect: 0
---- !u!114 &114289283048687070
+--- !u!114 &114574646797538670
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1901647981631510}
+  m_GameObject: {fileID: 1442769004622596}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.94482756, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.7241378, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -72,18 +72,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!222 &222747156962718732
+--- !u!222 &222693896621114470
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1901647981631510}
---- !u!224 &224971590668666056
+  m_GameObject: {fileID: 1442769004622596}
+--- !u!224 &224532908245498440
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1901647981631510}
+  m_GameObject: {fileID: 1442769004622596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}

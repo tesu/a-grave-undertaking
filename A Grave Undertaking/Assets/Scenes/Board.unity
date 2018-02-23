@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Move
+  m_Text: Resurrect
 --- !u!222 &107418325
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 516012295}
   - component: {fileID: 516012294}
   m_Layer: 5
-  m_Name: MoveButton
+  m_Name: RezButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -403,7 +403,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 516012295}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1135600666}
+        m_MethodName: action_Resurrect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &516012295
@@ -1135,6 +1146,7 @@ MonoBehaviour:
   DigButton: {fileID: 1981561418}
   FinishButton: {fileID: 794230049}
   Player1Turn: 1
+  selectedPiece: {fileID: 0}
 --- !u!4 &1135600665
 Transform:
   m_ObjectHideFlags: 0
@@ -1162,9 +1174,10 @@ MonoBehaviour:
   gameManager: {fileID: 1135600663}
   boardPanel: {fileID: 824361072}
   Pawn: {fileID: 1901647981631510, guid: 929f0199e2b5d7648900c72008223641, type: 2}
-  King: {fileID: 0}
-  Knight: {fileID: 0}
-  Bishop: {fileID: 0}
+  King: {fileID: 1442769004622596, guid: 4c712b14db3a0a1468d748e19a63dcfd, type: 2}
+  Knight: {fileID: 1901647981631510, guid: 44db7e27b55218d44819125d222f7814, type: 2}
+  Bishop: {fileID: 1901647981631510, guid: 7840f6e32438e0041b8287f539f16d9b, type: 2}
+  oldPiece: {fileID: 0}
 --- !u!1 &1466585917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,7 +1319,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Attack
+  m_Text: Upgrade
 --- !u!222 &1763411388
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1526,7 +1539,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1981561419}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1135600666}
+        m_MethodName: action_Dig
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1981561419
@@ -1574,7 +1598,7 @@ GameObject:
   - component: {fileID: 2126654635}
   - component: {fileID: 2126654634}
   m_Layer: 5
-  m_Name: AttackButton
+  m_Name: UpgradeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1637,7 +1661,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2126654635}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1135600666}
+        m_MethodName: action_Upgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2126654635
