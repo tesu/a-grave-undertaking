@@ -13,11 +13,16 @@ public class GameManager : MonoBehaviour {
     public Color HighlightColor;
     public Color ClickedColor;
     public Text InfoText;
+    public int InfoTextFontSize;
+    public Button AttackButton;
+    public Button MoveButton;
+    public Button DigButton;
+    public Button FinishButton;
 
     private int boardSize = StaticVariables.BoardSize;
     private Board board;
     private GameObject highlightedCell;
-    private bool clickedCell;
+    private bool clicked;
 
 	// Use this for initialization
 	void Start () {
@@ -62,7 +67,7 @@ public class GameManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             if (highlightedCell != null) {
-                clickedCell = true;
+                clicked = true;
                 string info = (board.GetCellX(highlightedCell) + 1) + ", " + (board.GetCellY(highlightedCell) + 1);
                 Debug.Log(info);
                 SetInfoText("You clicked square: " + info);
@@ -74,8 +79,24 @@ public class GameManager : MonoBehaviour {
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0)) {
-            clickedCell = false;
+            clicked = false;
         }
+    }
+
+    void OnAttackButtonClick() {
+
+    }
+
+    void OnMoveButtonClick() {
+
+    }
+
+    void OnDigButtonClick() {
+
+    }
+
+    void OnFinishButtonClick() {
+
     }
 
     void DeHighlightCell() {
@@ -87,12 +108,12 @@ public class GameManager : MonoBehaviour {
     void HighlightCell() {
         if (highlightedCell != null) {
             Color color = HighlightColor;
-            if (clickedCell) color = ClickedColor;
+            if (clicked) color = ClickedColor;
             highlightedCell.GetComponent<Image>().color = color;
         }
     }
 
     void SetInfoText(string text) {
-        InfoText.text = "<color=white><size=30>" + text + "</size></color>";
+        InfoText.text = "<color=white><size=" + InfoTextFontSize + ">" + text + "</size></color>";
     }
 }
