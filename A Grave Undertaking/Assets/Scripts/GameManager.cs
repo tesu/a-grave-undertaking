@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour {
     public Raycaster raycaster;
     public Color HighlightColor;
     public Color ClickedColor;
+    public Text TurnText;
     public Text InfoText;
-    public int InfoTextFontSize;
+    public int TextFontSize;
     public Button AttackButton;
     public Button MoveButton;
     public Button DigButton;
     public Button FinishButton;
+    public bool Player1Turn;
 
     private int boardSize = StaticVariables.BoardSize;
     private Board board;
@@ -41,6 +43,8 @@ public class GameManager : MonoBehaviour {
             }
         }
         SetInfoText("Welcome!");
+        SetTurnText();
+        FinishButton.onClick.AddListener(OnFinishButtonClick);
 	}
 
     // Update is called once per frame
@@ -96,7 +100,9 @@ public class GameManager : MonoBehaviour {
     }
 
     void OnFinishButtonClick() {
-
+        Player1Turn = !Player1Turn;
+        SetTurnText();
+        Debug.Log("clicked");
     }
 
     void DeHighlightCell() {
@@ -114,6 +120,17 @@ public class GameManager : MonoBehaviour {
     }
 
     void SetInfoText(string text) {
-        InfoText.text = "<color=white><size=" + InfoTextFontSize + ">" + text + "</size></color>";
+        InfoText.text = "<color=white><size=" + TextFontSize + ">" + text + "</size></color>";
+    }
+
+    void SetTurnText() {
+        int player;
+        if (Player1Turn) {
+            player = 1;
+        }
+        else {
+            player = 2;
+        }
+        TurnText.text = "<color=white><size=" + TextFontSize + ">Player " + player + "'s Turn" + "</size></color>";
     }
 }
