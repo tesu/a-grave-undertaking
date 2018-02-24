@@ -23,6 +23,9 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         board = gameManager.GetComponent<GameManager>().board;
         boardPanel = gameManager.GetComponent<GameManager>().BoardPanel;
         SpawnPiece(5, 4, Pawn, "Player1");
+        SpawnPiece(7, 6, King, "Player1");
+        SpawnPiece(3, 5, Knight, "Player1");
+        SpawnPiece(4, 2, Bishop, "Player1");
     }
 
     // This will have a third argument with the type of piece to spawn

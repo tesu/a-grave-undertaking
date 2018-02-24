@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour {
                     Debug.Log("Moving piece");
                     selectedPiece.transform.parent = highlightedCell.transform;
                     selectedPiece.transform.position = highlightedCell.transform.position;
-                    selectedPiece.GetComponent<Pawn>().xCoord = board.GetCellX(highlightedCell) + 1;
-                    selectedPiece.GetComponent<Pawn>().yCoord = board.GetCellY(highlightedCell) + 1;
+                    selectedPiece.GetComponent<Piece>().xCoord = board.GetCellX(highlightedCell) + 1;
+                    selectedPiece.GetComponent<Piece>().yCoord = board.GetCellY(highlightedCell) + 1;
                     ClearHighlights();
                     legalTiles.Clear();
                     selectedPiece = null;
@@ -101,12 +101,14 @@ public class GameManager : MonoBehaviour {
 
     void CalculateLegalMoves(Transform selectedPiece)
     {
-        if(selectedPiece.name == "Pawn(Clone)")
+        // works because inheritance
+        int x = selectedPiece.GetComponent<Piece>().xCoord;
+        int y = selectedPiece.GetComponent<Piece>().yCoord;
+        Debug.Log("x: " + x);
+        Debug.Log("y: " + y);
+
+        if (selectedPiece.name == "Pawn(Clone)" || selectedPiece.name == "King(Clone)")
         {
-            int x = selectedPiece.GetComponent<Pawn>().xCoord;
-            int y = selectedPiece.GetComponent<Pawn>().yCoord;
-            Debug.Log("x: " + x);
-            Debug.Log("y: " + y);
             // NE
             if (x + 1 > 0 && x + 1 <= StaticVariables.BoardSize)
             {
@@ -171,20 +173,138 @@ public class GameManager : MonoBehaviour {
                     legalTiles.Add(board.GetCell(x - 1, y - 2));
                 }
             }
-        }
-        HighlightLegalTiles(legalTiles);
-        if (selectedPiece.name == "King(Clone)")
-        {
-
-        }
+        }      
         if (selectedPiece.name == "Knight(Clone)")
         {
-
+            // N-NE
+            if (x + 1 > 0 && x + 1 <= StaticVariables.BoardSize)
+            {
+                if (y - 2 > 0 && y - 2 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x, y - 3));
+                }
+            }
+            // E-NE
+            if (x + 2 > 0 && x + 2 <= StaticVariables.BoardSize)
+            {
+                if (y - 1 > 0 && y - 1 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x + 1, y - 2));
+                }
+            }
+            // E-SE
+            if (x + 2 > 0 && x + 2 <= StaticVariables.BoardSize)
+            {
+                if (y + 1 > 0 && y + 1 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x + 1, y));
+                }
+            }
+            // S-SE
+            if (x + 1 > 0 && x + 1 <= StaticVariables.BoardSize)
+            {
+                if (y + 2 > 0 && y + 2 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x, y + 1));
+                }
+            }
+            // S-SW
+            if (x - 1 > 0 && x - 1 <= StaticVariables.BoardSize)
+            {
+                if (y + 2 > 0 && y + 2 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x - 2, y + 1));
+                }
+            }
+            // W-SW
+            if (x - 2 > 0 && x - 2 <= StaticVariables.BoardSize)
+            {
+                if (y + 1 > 0 && y + 1 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x - 3, y));
+                }
+            }
+            // W-NW
+            if (x - 2 > 0 && x - 2 <= StaticVariables.BoardSize)
+            {
+                if (y - 1 > 0 && y - 1 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x - 3, y - 2));
+                }
+            }
+            // N-NW
+            if (x - 1 > 0 && x - 1 <= StaticVariables.BoardSize)
+            {
+                if (y - 2 > 0 && y - 2 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x - 2, y - 3));
+                }
+            }
         }
         if (selectedPiece.name == "Bishop(Clone)")
         {
-
+            // NE
+            int xtemp = x;
+            int ytemp = y;
+            while(xtemp <= StaticVariables.BoardSize && ytemp >= 1)
+            {
+                if (xtemp + 1 > 0 && xtemp + 1 <= StaticVariables.BoardSize)
+                {
+                    if (ytemp - 1 > 0 && ytemp - 1 <= StaticVariables.BoardSize)
+                    {
+                        legalTiles.Add(board.GetCell(xtemp, ytemp - 2));
+                    }
+                }
+                xtemp++;
+                ytemp--;
+            }
+            // SE
+            xtemp = x;
+            ytemp = y;
+            while(xtemp <= StaticVariables.BoardSize && ytemp <= StaticVariables.BoardSize)
+            {
+                if (xtemp + 1 > 0 && xtemp + 1 <= StaticVariables.BoardSize)
+                {
+                    if (ytemp + 1 > 0 && ytemp + 1 <= StaticVariables.BoardSize)
+                    {
+                        legalTiles.Add(board.GetCell(xtemp, ytemp));
+                    }
+                }
+                xtemp++;
+                ytemp++;
+            }
+            // SW
+            xtemp = x;
+            ytemp = y;
+            while (xtemp >= 1 && ytemp <= StaticVariables.BoardSize)
+            {
+                if (xtemp - 1 > 0 && xtemp - 1 <= StaticVariables.BoardSize)
+                {
+                    if (ytemp + 1 > 0 && ytemp + 1 <= StaticVariables.BoardSize)
+                    {
+                        legalTiles.Add(board.GetCell(xtemp - 2, ytemp));
+                    }
+                }
+                xtemp--;
+                ytemp++;
+            }
+            // NW
+            xtemp = x;
+            ytemp = y;
+            while (xtemp >= 1 && ytemp >= 1)
+            {
+                if (xtemp - 1 > 0 && xtemp - 1 <= StaticVariables.BoardSize)
+                {
+                    if (ytemp - 1 > 0 && ytemp - 1 <= StaticVariables.BoardSize)
+                    {
+                        legalTiles.Add(board.GetCell(xtemp - 2, ytemp - 2));
+                    }
+                }
+                xtemp--;
+                ytemp--;
+            }
         }
+        HighlightLegalTiles(legalTiles);
     }
 
     void HighlightLegalTiles(List<GameObject> legalTiles)
