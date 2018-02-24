@@ -66,14 +66,21 @@ public class GameManager : MonoBehaviour {
                 SetInfoText("You clicked square: " + info);
                 if (selectedPiece)
                 {
-                    Debug.Log("Moving piece");
-                    selectedPiece.transform.parent = highlightedCell.transform;
-                    selectedPiece.transform.position = highlightedCell.transform.position;
-                    selectedPiece.GetComponent<Piece>().xCoord = board.GetCellX(highlightedCell) + 1;
-                    selectedPiece.GetComponent<Piece>().yCoord = board.GetCellY(highlightedCell) + 1;
-                    ClearHighlights();
-                    legalTiles.Clear();
-                    selectedPiece = null;
+                    if(legalTiles.Contains(highlightedCell))
+                    {
+                        Debug.Log("Moving piece to legal tile");
+                        selectedPiece.transform.parent = highlightedCell.transform;
+                        selectedPiece.transform.position = highlightedCell.transform.position;
+                        selectedPiece.GetComponent<Piece>().xCoord = board.GetCellX(highlightedCell) + 1;
+                        selectedPiece.GetComponent<Piece>().yCoord = board.GetCellY(highlightedCell) + 1;
+                        ClearHighlights();
+                        legalTiles.Clear();
+                        selectedPiece = null;
+                    }
+                    else
+                    {
+                        Debug.Log("This is not a legal move. Please select a highlighted tile");
+                    }                 
                 }
                 else if (highlightedCell.transform.childCount > 0) // Any pieces on this cell?
                 {
