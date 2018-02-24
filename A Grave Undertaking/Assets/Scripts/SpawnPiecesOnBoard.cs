@@ -32,6 +32,8 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         GameObject spawnInCell = board.GetCell(xCoord - 1, yCoord - 1);
         GameObject newPiece = Instantiate(piece, spawnInCell.transform);
         newPiece.tag = PlayerTag;
+        newPiece.GetComponent<Piece>().xCoord = xCoord;
+        newPiece.GetComponent<Piece>().yCoord = yCoord;
     }
 
     public void action_Upgrade()

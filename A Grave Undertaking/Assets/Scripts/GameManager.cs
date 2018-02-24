@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour {
     public Button FinishButton;
     public bool Player1Turn;
 
+    public List<GameObject> legalTiles = new List<GameObject>();
+
     private int boardSize = StaticVariables.BoardSize;
     public Board board;
     private GameObject highlightedCell;
@@ -31,7 +33,6 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         InitUI();
-        
 	}
 
     // Update is called once per frame
@@ -68,12 +69,17 @@ public class GameManager : MonoBehaviour {
                     Debug.Log("Moving piece");
                     selectedPiece.transform.parent = highlightedCell.transform;
                     selectedPiece.transform.position = highlightedCell.transform.position;
+                    selectedPiece.GetComponent<Pawn>().xCoord = board.GetCellX(highlightedCell) + 1;
+                    selectedPiece.GetComponent<Pawn>().yCoord = board.GetCellY(highlightedCell) + 1;
+                    ClearHighlights();
+                    legalTiles.Clear();
                     selectedPiece = null;
                 }
                 else if (highlightedCell.transform.childCount > 0) // Any pieces on this cell?
                 {
                     // This assumes 1 child for now for simplicity
                     selectedPiece = highlightedCell.transform.GetChild(0);
+                    CalculateLegalMoves(selectedPiece);
                 }
             }
             else {
@@ -91,6 +97,109 @@ public class GameManager : MonoBehaviour {
         }
 
         HighlightCell();
+    }
+
+    void CalculateLegalMoves(Transform selectedPiece)
+    {
+        if(selectedPiece.name == "Pawn(Clone)")
+        {
+            int x = selectedPiece.GetComponent<Pawn>().xCoord;
+            int y = selectedPiece.GetComponent<Pawn>().yCoord;
+            Debug.Log("x: " + x);
+            Debug.Log("y: " + y);
+            // NE
+            if (x + 1 > 0 && x + 1 <= StaticVariables.BoardSize)
+            {
+                if (y - 1 > 0 && y - 1 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x, y - 2));
+                }
+            }
+            // E
+            if (x + 1 > 0 && x + 1 <= StaticVariables.BoardSize)
+            {
+                if (y > 0 && y <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x, y - 1));
+                }
+            }
+            // SE
+            if (x + 1 > 0 && x + 1 <= StaticVariables.BoardSize)
+            {
+                if (y + 1 > 0 && y + 1 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x, y));
+                }
+            }
+            // S
+            if (x > 0 && x <= StaticVariables.BoardSize)
+            {
+                if (y + 1 > 0 && y + 1 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x - 1, y));
+                }
+            }
+            // SW
+            if (x - 1 > 0 && x - 1 <= StaticVariables.BoardSize)
+            {
+                if (y + 1 > 0 && y + 1 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x - 2, y));
+                }
+            }
+            // W
+            if (x - 1 > 0 && x - 1 <= StaticVariables.BoardSize)
+            {
+                if (y > 0 && y <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x - 2, y - 1));
+                }
+            }
+            // NW
+            if (x - 1 > 0 && x - 1 <= StaticVariables.BoardSize)
+            {
+                if (y - 1 > 0 && y - 1 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x - 2, y - 2));
+                }
+            }
+            // N
+            if (x > 0 && x <= StaticVariables.BoardSize)
+            {
+                if (y - 1 > 0 && y - 1 <= StaticVariables.BoardSize)
+                {
+                    legalTiles.Add(board.GetCell(x - 1, y - 2));
+                }
+            }
+        }
+        HighlightLegalTiles(legalTiles);
+        if (selectedPiece.name == "King(Clone)")
+        {
+
+        }
+        if (selectedPiece.name == "Knight(Clone)")
+        {
+
+        }
+        if (selectedPiece.name == "Bishop(Clone)")
+        {
+
+        }
+    }
+
+    void HighlightLegalTiles(List<GameObject> legalTiles)
+    {
+        foreach(GameObject tile in legalTiles)
+        {
+            tile.GetComponent<Image>().color = Color.blue;
+        }
+    }
+    void ClearHighlights()
+    {
+        foreach(GameObject tile in legalTiles)
+        {
+            tile.GetComponent<Image>().color = Color.black;
+        }
     }
 
     void InitUI() {
