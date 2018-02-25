@@ -1178,6 +1178,7 @@ MonoBehaviour:
   King: {fileID: 1442769004622596, guid: 4c712b14db3a0a1468d748e19a63dcfd, type: 2}
   Knight: {fileID: 1901647981631510, guid: 44db7e27b55218d44819125d222f7814, type: 2}
   Bishop: {fileID: 1901647981631510, guid: 7840f6e32438e0041b8287f539f16d9b, type: 2}
+  DeadBody: {fileID: 1905577914170456, guid: 9982085f9a898214094cea7e758ea153, type: 2}
   oldPiece: {fileID: 0}
 --- !u!1 &1466585917
 GameObject:

@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour {
     public bool Player1Turn;
 
     public List<GameObject> legalTiles = new List<GameObject>();
-
     private int boardSize = StaticVariables.BoardSize;
     public Board board;
     private GameObject highlightedCell;
@@ -45,7 +44,6 @@ public class GameManager : MonoBehaviour {
                 resultCell = result.gameObject;
             }
         }
-
 
         if (resultCell != null) {
             DeHighlightCell(false);
@@ -85,8 +83,12 @@ public class GameManager : MonoBehaviour {
                 else if (highlightedCell.transform.childCount > 0) // Any pieces on this cell?
                 {
                     // This assumes 1 child for now for simplicity
-                    selectedPiece = highlightedCell.transform.GetChild(0);
-                    CalculateLegalMoves(selectedPiece);
+                    // Neutral pieces cannot be selected
+                    if (highlightedCell.transform.GetChild(0).tag != "Neutral")
+                    {
+                        selectedPiece = highlightedCell.transform.GetChild(0);
+                        CalculateLegalMoves(selectedPiece);
+                    }                 
                 }
             }
             else {
