@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnPiecesOnBoard : MonoBehaviour {
 
@@ -22,10 +23,15 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         // This start will run after GameManager (Edit, Proj Settings, Script Exe Order)
         board = gameManager.GetComponent<GameManager>().board;
         boardPanel = gameManager.GetComponent<GameManager>().BoardPanel;
-        SpawnPiece(5, 4, Pawn, "Player1");
-        SpawnPiece(7, 6, King, "Player1");
-        SpawnPiece(3, 5, Knight, "Player1");
-        SpawnPiece(4, 2, Bishop, "Player1");
+        SpawnPiece(1, 2, Pawn, "Player1");
+        SpawnPiece(2, 1, Pawn, "Player1");
+        SpawnPiece(1, 1, King, "Player1");
+        SpawnPiece(8, 7, Pawn, "Player2");
+        SpawnPiece(7, 8, Pawn, "Player2");
+        SpawnPiece(8, 8, King, "Player2");
+        SpawnPiece(4, 4, Knight, "Player2");
+        SpawnPiece(4, 5, Bishop, "Player2");
+        AssignColorsByTag();
     }
 
     // This will have a third argument with the type of piece to spawn
@@ -57,6 +63,15 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
             return;
         }
         Debug.Log("You cannot upgrade this piece");
+    }
+
+    void AssignColorsByTag()
+    {
+        GameObject[] player2pieces = GameObject.FindGameObjectsWithTag("Player2");
+        foreach(GameObject piece in player2pieces)
+        {
+            piece.GetComponent<Image>().color = Color.blue;
+        }
     }
 
     void UpgradeReplacement(GameObject upgradedPiece)
