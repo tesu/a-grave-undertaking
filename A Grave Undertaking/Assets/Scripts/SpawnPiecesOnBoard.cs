@@ -30,8 +30,8 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         SpawnPiece(8, 7, Pawn, "Player2");
         SpawnPiece(7, 8, Pawn, "Player2");
         SpawnPiece(8, 8, King, "Player2");
-        SpawnPiece(4, 4, Knight, "Player2");
-        SpawnPiece(4, 5, Bishop, "Player2");
+        //SpawnPiece(4, 4, Knight, "Player2");
+        //SpawnPiece(4, 5, Bishop, "Player2");
         AssignColorsByTag();
     }
 
@@ -44,6 +44,10 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         newPiece.tag = PlayerTag;
         newPiece.GetComponent<Piece>().xCoord = xCoord;
         newPiece.GetComponent<Piece>().yCoord = yCoord;
+        if (newPiece.tag == "Player2")
+        {
+            newPiece.GetComponent<Image>().color = Color.blue;
+        }
     }
 
     public void action_Upgrade()
@@ -136,11 +140,19 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
     {
         Piece piece = gameManager.GetComponent<GameManager>().selectedPiece.GetComponent<Piece>();
         Cell cell = board.GetCell(piece.xCoord-1, piece.yCoord-1).GetComponent<Cell>();
-        gameManager.GetComponent<GameManager>().SetInfoText("You dug up "+cell.hidden);
         if (cell.hidden == Cell.hiddenValue.Bomb)
         {
             Destroy(gameManager.GetComponent<GameManager>().selectedPiece.gameObject);
             cell.hidden = Cell.hiddenValue.Empty;
+            gameManager.GetComponent<GameManager>().SetInfoText("You dug up a bomb! All cells on that tile have died.");
+        }
+        else if (cell.hidden == Cell.hiddenValue.Empty)
+        {
+            gameManager.GetComponent<GameManager>().SetInfoText("Nothing found.");
+        }
+        else if (cell.hidden == Cell.hiddenValue.Body)
+        {
+            gameManager.GetComponent<GameManager>().SetInfoText("You dug up a dead body that can be resurrected.");
         }
 
         gameManager.GetComponent<GameManager>().ClearHighlights();
