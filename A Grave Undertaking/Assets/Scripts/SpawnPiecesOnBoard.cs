@@ -140,11 +140,19 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
     {
         Piece piece = gameManager.GetComponent<GameManager>().selectedPiece.GetComponent<Piece>();
         Cell cell = board.GetCell(piece.xCoord-1, piece.yCoord-1).GetComponent<Cell>();
-        gameManager.GetComponent<GameManager>().SetInfoText("You dug up "+cell.hidden);
         if (cell.hidden == Cell.hiddenValue.Bomb)
         {
             Destroy(gameManager.GetComponent<GameManager>().selectedPiece.gameObject);
             cell.hidden = Cell.hiddenValue.Empty;
+            gameManager.GetComponent<GameManager>().SetInfoText("You dug up a bomb! All cells on that tile have died.");
+        }
+        else if (cell.hidden == Cell.hiddenValue.Empty)
+        {
+            gameManager.GetComponent<GameManager>().SetInfoText("Nothing found.");
+        }
+        else if (cell.hidden == Cell.hiddenValue.Body)
+        {
+            gameManager.GetComponent<GameManager>().SetInfoText("You dug up a dead body that can be resurrected.");
         }
 
         gameManager.GetComponent<GameManager>().ClearHighlights();
