@@ -44,6 +44,10 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         newPiece.tag = PlayerTag;
         newPiece.GetComponent<Piece>().xCoord = xCoord;
         newPiece.GetComponent<Piece>().yCoord = yCoord;
+        if (newPiece.tag == "Player2")
+        {
+            newPiece.GetComponent<Image>().color = Color.blue;
+        }
     }
 
     public void action_Upgrade()
