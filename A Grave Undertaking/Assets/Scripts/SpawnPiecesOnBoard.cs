@@ -94,18 +94,48 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
 
     public void action_Resurrect()
     {
-        // Available only if the current cell of selected piece contains a neutral piece
-        // Just pick a random neutral piece if more than 1? Is there a need to differentiate?
+        Piece piece = gameManager.GetComponent<GameManager>().selectedPiece.GetComponent<Piece>();
+        Cell cell = board.GetCell(piece.xCoord-1, piece.yCoord-1).GetComponent<Cell>();
+        if (cell.hidden != Cell.hiddenValue.Body)
+        {
+            Debug.Log("You cannot resurrect here.");
+            return;
+        }
+
+        int[] offsets = { -1, 0, 1 };
+        bool found = false;
+        foreach (int i in offsets)
+        {
+            if (found) break;
+            foreach (int j in offsets)
+            {
+                int x = piece.xCoord - 1 + i;
+                int y = piece.yCoord - 1 + j;
+                if (x > 0 && x <= StaticVariables.BoardSize && y > 0 && y <= StaticVariables.BoardSize && board.GetCell(x, y).transform.childCount == 0)
+                {
+                    Debug.Log("You resurrected at "+(x+1)+", "+(y+1));
+                    SpawnPiece(x+1, y+1, Pawn, gameManager.GetComponent<GameManager>().Player1Turn ? "Player1" : "Player2");
+                    // probably remove the body too
+                    found = true;
+                    break;
+                }
+            }
+
+        }
+
+        gameManager.GetComponent<GameManager>().ClearHighlights();
+        gameManager.GetComponent<GameManager>().legalTiles.Clear();
+        gameManager.GetComponent<GameManager>().selectedPiece = null;
     }
 
     public void action_Dig()
     {
         Piece piece = gameManager.GetComponent<GameManager>().selectedPiece.GetComponent<Piece>();
-        Cell cell = board.GetCell(piece.xCoord, piece.yCoord).GetComponent<Cell>();
+        Cell cell = board.GetCell(piece.xCoord-1, piece.yCoord-1).GetComponent<Cell>();
         gameManager.GetComponent<GameManager>().SetInfoText("You dug up "+cell.hidden);
         if (cell.hidden == Cell.hiddenValue.Bomb)
         {
-            Destroy(gameManager.GetComponent<GameManager>().selectedPiece);
+            Destroy(gameManager.GetComponent<GameManager>().selectedPiece.gameObject);
         }
 
         gameManager.GetComponent<GameManager>().ClearHighlights();
