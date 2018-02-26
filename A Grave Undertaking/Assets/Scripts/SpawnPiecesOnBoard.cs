@@ -32,7 +32,6 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         SpawnPiece(8, 8, King, "Player2");
         SpawnPiece(4, 4, Knight, "Player2");
         SpawnPiece(4, 5, Bishop, "Player2");
-        SpawnPiece(6, 3, DeadBody, "Neutral");
         AssignColorsByTag();
     }
 
