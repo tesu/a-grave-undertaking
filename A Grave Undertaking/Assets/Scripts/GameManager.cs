@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour {
                     if(legalTiles.Contains(highlightedCell))
                     {
                         Debug.Log("Moving piece to legal tile");
-                        selectedPiece.transform.parent = highlightedCell.transform;
+                        selectedPiece.transform.SetParent(highlightedCell.transform);
                         selectedPiece.transform.position = highlightedCell.transform.position;
                         selectedPiece.GetComponent<Piece>().xCoord = board.GetCellX(highlightedCell) + 1;
                         selectedPiece.GetComponent<Piece>().yCoord = board.GetCellY(highlightedCell) + 1;
