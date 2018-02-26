@@ -100,7 +100,17 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
 
     public void action_Dig()
     {
-        // Available only if the current cell of selected piece has not been flipped
+        Piece piece = gameManager.GetComponent<GameManager>().selectedPiece.GetComponent<Piece>();
+        Cell cell = board.GetCell(piece.xCoord, piece.yCoord).GetComponent<Cell>();
+        gameManager.GetComponent<GameManager>().SetInfoText("You dug up "+cell.hidden);
+        if (cell.hidden == Cell.hiddenValue.Bomb)
+        {
+            Destroy(gameManager.GetComponent<GameManager>().selectedPiece);
+        }
+
+        gameManager.GetComponent<GameManager>().ClearHighlights();
+        gameManager.GetComponent<GameManager>().legalTiles.Clear();
+        gameManager.GetComponent<GameManager>().selectedPiece = null;
     }
 
     void DestroyOldPiece()

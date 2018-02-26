@@ -394,7 +394,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void SetInfoText(string text) {
+    public void SetInfoText(string text) {
         InfoText.text = "<color=white><size=" + TextFontSize + ">" + text + "</size></color>";
     }
 
