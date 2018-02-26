@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour {
                         selectedPiece.transform.position = highlightedCell.transform.position;
                         selectedPiece.GetComponent<Piece>().xCoord = board.GetCellX(highlightedCell) + 1;
                         selectedPiece.GetComponent<Piece>().yCoord = board.GetCellY(highlightedCell) + 1;
+                        selectedPiece.GetComponent<Piece>().turnIsOver = true;
                         ClearHighlights();
                         legalTiles.Clear();
                         selectedPiece = null;
@@ -86,8 +87,15 @@ public class GameManager : MonoBehaviour {
                     // Neutral pieces cannot be selected
                     if (highlightedCell.transform.GetChild(0).tag != "Neutral")
                     {
-                        selectedPiece = highlightedCell.transform.GetChild(0);
-                        CalculateLegalMoves(selectedPiece);
+                        if(highlightedCell.transform.GetChild(0).GetComponent<Piece>().turnIsOver)
+                        {
+                            Debug.Log("This piece cannot be selected. It cannot move this turn");
+                        }
+                        else
+                        {
+                            selectedPiece = highlightedCell.transform.GetChild(0);
+                            CalculateLegalMoves(selectedPiece);
+                        }               
                     }                 
                 }
             }
@@ -337,9 +345,6 @@ public class GameManager : MonoBehaviour {
         SetInfoText("Welcome!");
         SetTurnText();
 
-        AttackButton.onClick.AddListener(OnAttackButtonClick);
-        MoveButton.onClick.AddListener(OnMoveButtonClick);
-        DigButton.onClick.AddListener(OnDigButtonClick);
         FinishButton.onClick.AddListener(OnFinishButtonClick);
     }
 
@@ -358,18 +363,6 @@ public class GameManager : MonoBehaviour {
                 board.AddCell(cell);
             }
         }
-    }
-
-    void OnAttackButtonClick() {
-
-    }
-
-    void OnMoveButtonClick() {
-
-    }
-
-    void OnDigButtonClick() {
-
     }
 
     void OnFinishButtonClick() {
@@ -407,6 +400,13 @@ public class GameManager : MonoBehaviour {
         else {
             player = 2;
         }
+
+        GameObject[] piecesToBeActivated =  GameObject.FindGameObjectsWithTag("Player" + player);
+        foreach(GameObject piece in piecesToBeActivated)
+        {
+            piece.GetComponent<Piece>().turnIsOver = false;
+        }
+
         TurnText.text = "<color=white><size=" + TextFontSize + ">Player " + player + "'s Turn" + "</size></color>";
     }
 }

@@ -80,6 +80,7 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
     {
         GameObject newPiece = Instantiate(upgradedPiece, oldPiece.parent);
         newPiece.tag = oldPiece.tag;
+        newPiece.GetComponent<Piece>().turnIsOver = true;
     }
 
     public void action_Resurrect()

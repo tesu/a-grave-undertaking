@@ -6,6 +6,8 @@ public class King : Pawn {
 
 	void Start ()
     {
+        maxMovement = 1;
         canResurrect = true;
-	}
+        turnIsOver = true;
+    }
 }
