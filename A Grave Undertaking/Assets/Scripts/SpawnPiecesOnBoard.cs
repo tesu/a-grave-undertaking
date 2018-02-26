@@ -98,9 +98,10 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         Cell cell = board.GetCell(piece.xCoord-1, piece.yCoord-1).GetComponent<Cell>();
         if (cell.hidden != Cell.hiddenValue.Body)
         {
-            Debug.Log("You cannot resurrect here.");
+            gameManager.GetComponent<GameManager>().SetInfoText("You cannot resurrect here!");
             return;
         }
+        cell.hidden = Cell.hiddenValue.Empty;
 
         int[] offsets = { -1, 0, 1 };
         bool found = false;
@@ -113,14 +114,17 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
                 int y = piece.yCoord - 1 + j;
                 if (x > 0 && x <= StaticVariables.BoardSize && y > 0 && y <= StaticVariables.BoardSize && board.GetCell(x, y).transform.childCount == 0)
                 {
-                    Debug.Log("You resurrected at "+(x+1)+", "+(y+1));
+                    gameManager.GetComponent<GameManager>().SetInfoText("You resurrected at " + (x+1) + ", " + (y+1));
                     SpawnPiece(x+1, y+1, Pawn, gameManager.GetComponent<GameManager>().Player1Turn ? "Player1" : "Player2");
-                    // probably remove the body too
                     found = true;
                     break;
                 }
             }
-
+        }
+        if (!found)
+        {
+            gameManager.GetComponent<GameManager>().SetInfoText("No room for resurrection!");
+            cell.hidden = Cell.hiddenValue.Body;
         }
 
         gameManager.GetComponent<GameManager>().ClearHighlights();
@@ -136,6 +140,7 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         if (cell.hidden == Cell.hiddenValue.Bomb)
         {
             Destroy(gameManager.GetComponent<GameManager>().selectedPiece.gameObject);
+            cell.hidden = Cell.hiddenValue.Empty;
         }
 
         gameManager.GetComponent<GameManager>().ClearHighlights();

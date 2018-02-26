@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         InitUI();
-	}
+    }
 
     // Update is called once per frame
     void Update() {
@@ -349,9 +349,10 @@ public class GameManager : MonoBehaviour {
         InitBoard();
 
         SetInfoText("Welcome!");
-        SetTurnText();
 
         FinishButton.onClick.AddListener(OnFinishButtonClick);
+        Player1Turn = true;
+        SetTurnText();
     }
 
     void InitBoard() {
