@@ -72,6 +72,12 @@ public class GameManager : MonoBehaviour {
                         selectedPiece.GetComponent<Piece>().xCoord = board.GetCellX(highlightedCell) + 1;
                         selectedPiece.GetComponent<Piece>().yCoord = board.GetCellY(highlightedCell) + 1;
                         selectedPiece.GetComponent<Piece>().turnIsOver = true;
+                        // This is an attack
+                        if(highlightedCell.transform.GetChild(0).tag != selectedPiece.tag)
+                        {
+                            Destroy(highlightedCell.transform.GetChild(0).gameObject);
+                            Debug.Log("You killed an enemy!");
+                        }
                         ClearHighlights();
                         legalTiles.Clear();
                         selectedPiece = null;
@@ -331,7 +337,7 @@ public class GameManager : MonoBehaviour {
             tile.GetComponent<Image>().color = Color.blue;
         }
     }
-    void ClearHighlights()
+    public void ClearHighlights()
     {
         foreach(GameObject tile in legalTiles)
         {
@@ -405,6 +411,23 @@ public class GameManager : MonoBehaviour {
         foreach(GameObject piece in piecesToBeActivated)
         {
             piece.GetComponent<Piece>().turnIsOver = false;
+        }
+
+        // just in case pieces aren't used
+        int tempOtherPlayer;
+        if (player == 1)
+        {
+            tempOtherPlayer = 2;
+        }
+        else
+        {
+            tempOtherPlayer = 1;
+        }
+
+        GameObject[] piecesToBeDeactivated = GameObject.FindGameObjectsWithTag("Player" + tempOtherPlayer);
+        foreach (GameObject piece in piecesToBeDeactivated)
+        {
+            piece.GetComponent<Piece>().turnIsOver = true;
         }
 
         TurnText.text = "<color=white><size=" + TextFontSize + ">Player " + player + "'s Turn" + "</size></color>";

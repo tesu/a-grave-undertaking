@@ -55,12 +55,18 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         {
             UpgradeReplacement(Bishop);
             DestroyOldPiece();
+            gameManager.GetComponent<GameManager>().ClearHighlights();
+            gameManager.GetComponent<GameManager>().legalTiles.Clear();
+            gameManager.GetComponent<GameManager>().selectedPiece = null;
             return;
         }
         if (oldPiece.name == "Pawn(Clone)")
         {
             UpgradeReplacement(Knight);
             DestroyOldPiece();
+            gameManager.GetComponent<GameManager>().ClearHighlights();
+            gameManager.GetComponent<GameManager>().legalTiles.Clear();
+            gameManager.GetComponent<GameManager>().selectedPiece = null;
             return;
         }
         Debug.Log("You cannot upgrade this piece");
@@ -79,6 +85,10 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
     {
         GameObject newPiece = Instantiate(upgradedPiece, oldPiece.parent);
         newPiece.tag = oldPiece.tag;
+        if(newPiece.tag == "Player2")
+        {
+            newPiece.GetComponent<Image>().color = Color.blue;
+        }
         newPiece.GetComponent<Piece>().turnIsOver = true;
     }
 
