@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour {
                 selectedCell = highlightedCell;
                 string info = (board.GetCellX(highlightedCell) + 1) + ", " + (board.GetCellY(highlightedCell) + 1);
                 Debug.Log(info);
-                SetInfoText("You clicked square: " + info);
                 if (selectedPiece)
                 {
                     if(legalTiles.Contains(highlightedCell))
@@ -85,7 +84,7 @@ public class GameManager : MonoBehaviour {
                                 Destroy(highlightedCell.transform.GetChild(0).gameObject);
                             }
                             Destroy(highlightedCell.transform.GetChild(0).gameObject);
-                            Debug.Log("You killed an enemy!");
+                            SetInfoText("You killed an enemy!");
                         }
                         ClearHighlights();
                         legalTiles.Clear();
@@ -127,7 +126,6 @@ public class GameManager : MonoBehaviour {
                     selectedCell = null;
                 }
                 Debug.Log("No Cell");
-                SetInfoText("You didn't click a square");
             }
         }
 
@@ -387,8 +385,7 @@ public class GameManager : MonoBehaviour {
 
     void InitUI() {
         InitBoard();
-
-        SetInfoText("Welcome!");
+        
         StartGamePanel.SetActive(true);
         FinishButton.onClick.AddListener(OnFinishButtonClick);
         Player1Turn = false;

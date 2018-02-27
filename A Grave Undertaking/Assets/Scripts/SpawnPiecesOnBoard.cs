@@ -73,7 +73,7 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
             gameManager.GetComponent<GameManager>().selectedPiece = null;
             return;
         }
-        Debug.Log("You cannot upgrade this piece");
+        gameManager.GetComponent<GameManager>().SetInfoText("This piece cannot be upgraded.");
     }
 
     void AssignColorsByTag()
@@ -102,7 +102,7 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         Cell cell = board.GetCell(piece.xCoord-1, piece.yCoord-1).GetComponent<Cell>();
         if (!cell.uncovered || cell.hidden != Cell.hiddenValue.Body)
         {
-            gameManager.GetComponent<GameManager>().SetInfoText("There are no bodies here to resurrect!");
+            gameManager.GetComponent<GameManager>().SetInfoText("There are no bodies here to resurrect.");
             return;
         }
         cell.hidden = Cell.hiddenValue.Empty;
