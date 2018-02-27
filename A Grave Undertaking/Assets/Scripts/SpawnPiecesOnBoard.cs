@@ -142,9 +142,18 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         Cell cell = board.GetCell(piece.xCoord-1, piece.yCoord-1).GetComponent<Cell>();
         if (cell.hidden == Cell.hiddenValue.Bomb)
         {
-            Destroy(gameManager.GetComponent<GameManager>().selectedPiece.gameObject);
-            cell.hidden = Cell.hiddenValue.Empty;
-            gameManager.GetComponent<GameManager>().SetInfoText("You dug up a bomb! All cells on that tile have died.");
+            // If this is king
+            if(gameManager.GetComponent<GameManager>().selectedPiece.name == "King(Clone)")
+            {
+                Destroy(gameManager.GetComponent<GameManager>().selectedPiece.gameObject);
+                gameManager.GetComponent<GameManager>().PlayerWinsState(gameManager.GetComponent<GameManager>().Player1Turn ? "Player2" : "Player1", "Bomb");
+            }
+            else
+            {
+                Destroy(gameManager.GetComponent<GameManager>().selectedPiece.gameObject);
+                cell.hidden = Cell.hiddenValue.Empty;
+                gameManager.GetComponent<GameManager>().SetInfoText("You dug up a bomb! All cells on that tile have died.");
+            }         
         }
         else if (cell.hidden == Cell.hiddenValue.Empty)
         {

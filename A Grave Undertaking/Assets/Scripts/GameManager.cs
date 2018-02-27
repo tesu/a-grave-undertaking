@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour {
                         {
                             if(highlightedCell.transform.GetChild(0).name == "King(Clone)")
                             {
-                                PlayerWinsState(selectedPiece.tag);
+                                PlayerWinsState(selectedPiece.tag, "Attack");
                                 Destroy(highlightedCell.transform.GetChild(0).gameObject);
                             }
                             Destroy(highlightedCell.transform.GetChild(0).gameObject);
@@ -441,11 +441,19 @@ public class GameManager : MonoBehaviour {
 
         TurnText.text = "<color=white><size=" + TextFontSize + ">Player " + player + "'s Turn" + "</size></color>";
     }
-    void PlayerWinsState(string currentPlayer)
+    public void PlayerWinsState(string currentPlayer, string reason)
     {
-        EndGamePanel.SetActive(true);
-        GameOverText.text = "The King has fallen. " + currentPlayer + " wins!";
-        Debug.Log("The King has fallen. " + currentPlayer + " wins!");
+        if(reason == "Bomb")
+        {
+            GameOverText.text = "Your King has died to a bomb. " + currentPlayer + " wins!";
+            Debug.Log("Your King has died to a bomb. " + currentPlayer + " wins!");
+        }
+        else
+        {
+            GameOverText.text = "The enemy King has fallen. " + currentPlayer + " wins!";
+            Debug.Log("The enemy King has fallen. " + currentPlayer + " wins!");
+        }
+        EndGamePanel.SetActive(true);  
     }
 
     public void ReloadLevel()
