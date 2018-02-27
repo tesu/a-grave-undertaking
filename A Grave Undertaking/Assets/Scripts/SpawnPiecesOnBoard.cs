@@ -131,6 +131,7 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
             cell.hidden = Cell.hiddenValue.Body;
         }
 
+        piece.turnIsOver = true;
         gameManager.GetComponent<GameManager>().ClearHighlights();
         gameManager.GetComponent<GameManager>().legalTiles.Clear();
         gameManager.GetComponent<GameManager>().selectedPiece = null;
@@ -170,6 +171,7 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
             gameManager.GetComponent<GameManager>().SetInfoText("You dug up a body that you can resurrect.");
         }
 
+        piece.turnIsOver = true;
         gameManager.GetComponent<GameManager>().ClearHighlights();
         gameManager.GetComponent<GameManager>().legalTiles.Clear();
         gameManager.GetComponent<GameManager>().selectedPiece = null;
