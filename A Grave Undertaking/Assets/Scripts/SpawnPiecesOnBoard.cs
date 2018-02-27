@@ -100,6 +100,11 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
     {
         Piece piece = gameManager.GetComponent<GameManager>().selectedPiece.GetComponent<Piece>();
         Cell cell = board.GetCell(piece.xCoord-1, piece.yCoord-1).GetComponent<Cell>();
+        if (!piece.canResurrect)
+        {
+            gameManager.GetComponent<GameManager>().SetInfoText("This unit cannot resurrect.");
+            return;
+        }
         if (!cell.uncovered || cell.hidden != Cell.hiddenValue.Body)
         {
             gameManager.GetComponent<GameManager>().SetInfoText("There are no bodies here to resurrect.");
