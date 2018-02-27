@@ -379,7 +379,7 @@ public class GameManager : MonoBehaviour {
     {
         foreach(GameObject tile in legalTiles)
         {
-            tile.GetComponent<Image>().color = Color.black;
+            tile.GetComponent<Image>().color = tile.GetComponent<Cell>().NormalColor();
         }
     }
 
@@ -413,14 +413,15 @@ public class GameManager : MonoBehaviour {
         Player1Turn = !Player1Turn;
         selectedPiece = null;
         SetTurnText();
+        SetInfoText("");
     }
 
     void DeHighlightCell(bool dehighlightSelected) {
         if (highlightedCell != null) {
-            highlightedCell.GetComponent<Image>().color = highlightedCell.GetComponent<Cell>().OriginalColor;
+            highlightedCell.GetComponent<Image>().color = highlightedCell.GetComponent<Cell>().NormalColor();
         }
         if (dehighlightSelected && selectedCell != null) {
-            selectedCell.GetComponent<Image>().color = selectedCell.GetComponent<Cell>().OriginalColor;
+            selectedCell.GetComponent<Image>().color = selectedCell.GetComponent<Cell>().NormalColor();
         }
     }
 

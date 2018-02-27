@@ -38,4 +38,10 @@ public class Cell : MonoBehaviour {
             EmptyTileCount--;
         }   
 	}
+
+    public Color NormalColor()
+    {
+        if (uncovered) return new Color(0, 0, 0, 255);
+        return new Color(255, 255, 255, 200);
+    }
 }
