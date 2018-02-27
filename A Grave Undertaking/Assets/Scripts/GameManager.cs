@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public GameObject WhiteCellPrefab;
     public GameObject BlackCellPrefab;
     public GameObject BoardPanel;
+    public GameObject StartGamePanel;
     public GameObject EndGamePanel;
     public Raycaster raycaster;
     public Color HighlightColor;
@@ -357,7 +358,7 @@ public class GameManager : MonoBehaviour {
         InitBoard();
 
         SetInfoText("Welcome!");
-
+        StartGamePanel.SetActive(true);
         FinishButton.onClick.AddListener(OnFinishButtonClick);
         Player1Turn = false;
         SetTurnText();
@@ -380,7 +381,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    void OnFinishButtonClick() {
+    public void OnFinishButtonClick() {
         Player1Turn = !Player1Turn;
         SetTurnText();
     }
@@ -459,5 +460,10 @@ public class GameManager : MonoBehaviour {
     public void ReloadLevel()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void StartGame()
+    {
+        StartGamePanel.SetActive(false);
     }
 }
