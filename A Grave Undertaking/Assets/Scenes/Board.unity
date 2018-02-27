@@ -1226,7 +1226,7 @@ MonoBehaviour:
   MoveButton: {fileID: 516012294}
   DigButton: {fileID: 1981561418}
   FinishButton: {fileID: 794230049}
-  Player1Turn: 0
+  Player1Turn: 1
   legalTiles: []
   selectedPiece: {fileID: 0}
 --- !u!4 &1135600665
