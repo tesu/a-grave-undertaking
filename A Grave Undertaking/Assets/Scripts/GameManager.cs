@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
     public GameObject WhiteCellPrefab;
     public GameObject BlackCellPrefab;
     public GameObject BoardPanel;
+    public GameObject EndGamePanel;
     public Raycaster raycaster;
     public Color HighlightColor;
     public Color ClickedColor;
     public Text TurnText;
     public Text InfoText;
+    public Text GameOverText;
     public int TextFontSize;
     public Button AttackButton;
     public Button MoveButton;
@@ -75,6 +78,11 @@ public class GameManager : MonoBehaviour {
                         // This is an attack
                         if(highlightedCell.transform.GetChild(0).tag != selectedPiece.tag)
                         {
+                            if(highlightedCell.transform.GetChild(0).name == "King(Clone)")
+                            {
+                                PlayerWinsState(selectedPiece.tag);
+                                Destroy(highlightedCell.transform.GetChild(0).gameObject);
+                            }
                             Destroy(highlightedCell.transform.GetChild(0).gameObject);
                             Debug.Log("You killed an enemy!");
                         }
@@ -351,7 +359,7 @@ public class GameManager : MonoBehaviour {
         SetInfoText("Welcome!");
 
         FinishButton.onClick.AddListener(OnFinishButtonClick);
-        Player1Turn = true;
+        Player1Turn = false;
         SetTurnText();
     }
 
@@ -432,5 +440,16 @@ public class GameManager : MonoBehaviour {
         }
 
         TurnText.text = "<color=white><size=" + TextFontSize + ">Player " + player + "'s Turn" + "</size></color>";
+    }
+    void PlayerWinsState(string currentPlayer)
+    {
+        EndGamePanel.SetActive(true);
+        GameOverText.text = "The King has fallen. " + currentPlayer + " wins!";
+        Debug.Log("The King has fallen. " + currentPlayer + " wins!");
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(0);
     }
 }
