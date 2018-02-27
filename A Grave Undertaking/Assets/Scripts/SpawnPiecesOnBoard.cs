@@ -100,9 +100,9 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
     {
         Piece piece = gameManager.GetComponent<GameManager>().selectedPiece.GetComponent<Piece>();
         Cell cell = board.GetCell(piece.xCoord-1, piece.yCoord-1).GetComponent<Cell>();
-        if (cell.hidden != Cell.hiddenValue.Body)
+        if (!cell.uncovered || cell.hidden != Cell.hiddenValue.Body)
         {
-            gameManager.GetComponent<GameManager>().SetInfoText("You cannot resurrect here!");
+            gameManager.GetComponent<GameManager>().SetInfoText("There are no bodies here to resurrect!");
             return;
         }
         cell.hidden = Cell.hiddenValue.Empty;
@@ -140,6 +140,12 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
     {
         Piece piece = gameManager.GetComponent<GameManager>().selectedPiece.GetComponent<Piece>();
         Cell cell = board.GetCell(piece.xCoord-1, piece.yCoord-1).GetComponent<Cell>();
+        if (cell.uncovered)
+        {
+            gameManager.GetComponent<GameManager>().SetInfoText("This cell has already been dug up.");
+            return;
+        }
+        cell.uncovered = true;
         if (cell.hidden == Cell.hiddenValue.Bomb)
         {
             // If this is king
@@ -161,7 +167,7 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         }
         else if (cell.hidden == Cell.hiddenValue.Body)
         {
-            gameManager.GetComponent<GameManager>().SetInfoText("You dug up a dead body that can be resurrected.");
+            gameManager.GetComponent<GameManager>().SetInfoText("You dug up a body that you can resurrect.");
         }
 
         gameManager.GetComponent<GameManager>().ClearHighlights();

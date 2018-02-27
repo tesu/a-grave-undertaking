@@ -8,6 +8,7 @@ public class Cell : MonoBehaviour {
     public Color OriginalColor;
     public enum hiddenValue { Body, Bomb, Empty };
     public hiddenValue hidden;
+    public bool uncovered = false;
     public static int bodyTileCount = 24;
     public static int bombTileCount = 8;
     public static int EmptyTileCount = 32; // changed it because I am lazy - didn't want to filter out the corner 6 tiles
