@@ -91,6 +91,13 @@ public class GameManager : MonoBehaviour {
                         legalTiles.Clear();
                         selectedPiece = null;
                     }
+                    else if(board.GetCellX(highlightedCell) + 1 == selectedPiece.GetComponent<Piece>().xCoord && board.GetCellY(highlightedCell) + 1 == selectedPiece.GetComponent<Piece>().yCoord)
+                    {
+                        Debug.Log("You selected the same tile. That piece is now deselected.");
+                        ClearHighlights();
+                        legalTiles.Clear();
+                        selectedPiece = null;
+                    }
                     else
                     {
                         Debug.Log("This is not a legal move. Please select a highlighted tile");
@@ -283,14 +290,23 @@ public class GameManager : MonoBehaviour {
                 if (xtemp + 1 > 0 && xtemp + 1 <= StaticVariables.BoardSize)
                 {
                     if (ytemp - 1 > 0 && ytemp - 1 <= StaticVariables.BoardSize)
-                    {
+                    {                       
                         legalTiles.Add(board.GetCell(xtemp, ytemp - 2));
+
+                        // If a piece there, we want to break out of the while loop.
+                        // Can move on top of a piece but not through it
+                        if (board.GetCell(xtemp, ytemp - 2).transform.childCount > 0)
+                        {
+                            goto Southeast;
+                        }
+                        
                     }
                 }
                 xtemp++;
                 ytemp--;
             }
             // SE
+            Southeast:
             xtemp = x;
             ytemp = y;
             while(xtemp <= StaticVariables.BoardSize && ytemp <= StaticVariables.BoardSize)
@@ -300,12 +316,17 @@ public class GameManager : MonoBehaviour {
                     if (ytemp + 1 > 0 && ytemp + 1 <= StaticVariables.BoardSize)
                     {
                         legalTiles.Add(board.GetCell(xtemp, ytemp));
+                        if (board.GetCell(xtemp, ytemp).transform.childCount > 0)
+                        {
+                            goto Southwest;
+                        }
                     }
                 }
                 xtemp++;
                 ytemp++;
             }
             // SW
+            Southwest:
             xtemp = x;
             ytemp = y;
             while (xtemp >= 1 && ytemp <= StaticVariables.BoardSize)
@@ -315,12 +336,17 @@ public class GameManager : MonoBehaviour {
                     if (ytemp + 1 > 0 && ytemp + 1 <= StaticVariables.BoardSize)
                     {
                         legalTiles.Add(board.GetCell(xtemp - 2, ytemp));
+                        if (board.GetCell(xtemp - 2, ytemp).transform.childCount > 0)
+                        {
+                            goto Northwest;
+                        }
                     }
                 }
                 xtemp--;
                 ytemp++;
             }
             // NW
+            Northwest:
             xtemp = x;
             ytemp = y;
             while (xtemp >= 1 && ytemp >= 1)
@@ -330,12 +356,17 @@ public class GameManager : MonoBehaviour {
                     if (ytemp - 1 > 0 && ytemp - 1 <= StaticVariables.BoardSize)
                     {
                         legalTiles.Add(board.GetCell(xtemp - 2, ytemp - 2));
+                        if (board.GetCell(xtemp - 2, ytemp - 2).transform.childCount > 0)
+                        {
+                            goto Done;
+                        }
                     }
                 }
                 xtemp--;
                 ytemp--;
             }
         }
+        Done:
         HighlightLegalTiles(legalTiles);
     }
 
@@ -383,6 +414,7 @@ public class GameManager : MonoBehaviour {
 
     public void OnFinishButtonClick() {
         Player1Turn = !Player1Turn;
+        selectedPiece = null;
         SetTurnText();
     }
 

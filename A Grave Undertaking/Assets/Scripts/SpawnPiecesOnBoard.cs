@@ -30,8 +30,8 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         SpawnPiece(8, 7, Pawn, "Player2");
         SpawnPiece(7, 8, Pawn, "Player2");
         SpawnPiece(8, 8, King, "Player2");
-        //SpawnPiece(4, 4, Knight, "Player2");
-        //SpawnPiece(4, 5, Bishop, "Player2");
+        SpawnPiece(6, 7, Knight, "Player2");
+        SpawnPiece(4, 5, Bishop, "Player2");
         AssignColorsByTag();
     }
 
