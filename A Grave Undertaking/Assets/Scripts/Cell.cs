@@ -39,6 +39,7 @@ public class Cell : MonoBehaviour {
 
     public Color NormalColor()
     {
+        if (uncovered && hidden == hiddenValue.Body) return new Color(0, 255, 0, 255);
         if (uncovered) return new Color(0, 0, 0, 255);
         return baseColor;
     }
