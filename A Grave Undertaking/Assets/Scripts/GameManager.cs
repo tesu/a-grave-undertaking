@@ -10,11 +10,13 @@ public class GameManager : MonoBehaviour {
     public GameObject WhiteCellPrefab;
     public GameObject BlackCellPrefab;
     public GameObject BoardPanel;
+    public GameObject UnitPanel;
     public GameObject StartGamePanel;
     public GameObject EndGamePanel;
     public Raycaster raycaster;
     public Color HighlightColor;
     public Color ClickedColor;
+    public Color LegalMoveColor;
     public Text TurnText;
     public Text InfoText;
     public Text GameOverText;
@@ -24,13 +26,15 @@ public class GameManager : MonoBehaviour {
     public Button DigButton;
     public Button FinishButton;
     public bool Player1Turn;
-
+    public Transform selectedPiece;
     public List<GameObject> legalTiles = new List<GameObject>();
-    private int boardSize = StaticVariables.BoardSize;
     public Board board;
+
+    private int boardSize = StaticVariables.BoardSize;
     private GameObject highlightedCell;
     private GameObject selectedCell;
-    public Transform selectedPiece;
+    private bool gameStarted = false;
+    
     private bool clicked;
 
 	// Use this for initialization
@@ -40,6 +44,8 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (!gameStarted)
+            return;
 
         List<RaycastResult> raycastResults = raycaster.GetAllRaycastObjects();
         GameObject resultCell = null;
@@ -96,6 +102,7 @@ public class GameManager : MonoBehaviour {
                         ClearHighlights();
                         legalTiles.Clear();
                         selectedPiece = null;
+                        selectedCell = null;
                     }
                     else
                     {
@@ -104,6 +111,9 @@ public class GameManager : MonoBehaviour {
                 }
                 else if (highlightedCell.transform.childCount > 0) // Any pieces on this cell?
                 {
+                    for (int i = 0; i < highlightedCell.transform.childCount; i++) {
+                        AddUnitToUnitPanel(highlightedCell.transform.GetChild(i));
+                    }
                     // This assumes 1 child for now for simplicity
                     // Neutral pieces cannot be selected
                     if (highlightedCell.transform.GetChild(0).tag != "Neutral")
@@ -122,9 +132,10 @@ public class GameManager : MonoBehaviour {
             }
             else {
                 DeHighlightCell(true);
-                if (selectedCell != null) {
-                    selectedCell = null;
-                }
+                ClearHighlights();
+                legalTiles.Clear();
+                selectedPiece = null;
+                selectedCell = null;
                 Debug.Log("No Cell");
             }
         }
@@ -134,6 +145,17 @@ public class GameManager : MonoBehaviour {
         }
 
         HighlightCell();
+    }
+
+    void AddUnitToUnitPanel(Transform child) {
+        var clone = Instantiate(child.gameObject);
+        clone.transform.SetParent(UnitPanel.transform);
+    }
+
+    void ClearUnitPanel() {
+        for (int i = 0; i < UnitPanel.transform.childCount; i++) {
+            Destroy(UnitPanel.transform.GetChild(i).gameObject);
+        }
     }
 
     void CalculateLegalMoves(Transform selectedPiece)
@@ -372,15 +394,17 @@ public class GameManager : MonoBehaviour {
     {
         foreach(GameObject tile in legalTiles)
         {
-            tile.GetComponent<Image>().color = Color.blue;
+            tile.GetComponent<Image>().color = Color.green;
         }
     }
+
     public void ClearHighlights()
     {
         foreach(GameObject tile in legalTiles)
         {
             tile.GetComponent<Image>().color = tile.GetComponent<Cell>().NormalColor();
         }
+        ClearUnitPanel();
     }
 
     void InitUI() {
@@ -410,6 +434,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void OnFinishButtonClick() {
+        gameStarted = true;
         Player1Turn = !Player1Turn;
         selectedPiece = null;
         SetTurnText();
@@ -417,11 +442,21 @@ public class GameManager : MonoBehaviour {
     }
 
     void DeHighlightCell(bool dehighlightSelected) {
-        if (highlightedCell != null) {
-            highlightedCell.GetComponent<Image>().color = highlightedCell.GetComponent<Cell>().NormalColor();
+        if (dehighlightSelected) {
+            if (highlightedCell != null) {
+                highlightedCell.GetComponent<Image>().color = highlightedCell.GetComponent<Cell>().NormalColor();
+            }
+            if (selectedCell != null) {
+                selectedCell.GetComponent<Image>().color = selectedCell.GetComponent<Cell>().NormalColor();
+            }
         }
-        if (dehighlightSelected && selectedCell != null) {
-            selectedCell.GetComponent<Image>().color = selectedCell.GetComponent<Cell>().NormalColor();
+        else {
+            if (highlightedCell != null && legalTiles.Contains(highlightedCell)) {
+                highlightedCell.GetComponent<Image>().color = LegalMoveColor;
+            }
+            else if (highlightedCell != null) {
+                highlightedCell.GetComponent<Image>().color = highlightedCell.GetComponent<Cell>().NormalColor();
+            }
         }
     }
 
@@ -439,6 +474,9 @@ public class GameManager : MonoBehaviour {
     }
 
     void SetTurnText() {
+        if (!gameStarted)
+            return;
+
         int player;
         if (Player1Turn) {
             player = 1;
