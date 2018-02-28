@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
             FinishButton.GetComponent<Image>().color = Color.green;
         }
 
-        //SetButtonInteractions();
+        SetButtonInteractions();
 
         List<RaycastResult> raycastResults = raycaster.GetAllRaycastObjects();
         GameObject resultCell = null;
