@@ -19,8 +19,7 @@ public class Bishop : Pawn {
             activeSprite = RedBishop_H;
             deactiveSprite = RedBishop;
         }
-        else
-        {
+        else if (tag == "Player2") {
             activeSprite = BlueBishop_H;
             deactiveSprite = BlueBishop;
         }

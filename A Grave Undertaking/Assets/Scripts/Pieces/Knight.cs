@@ -18,8 +18,7 @@ public class Knight : Piece {
             activeSprite = RedKnight_H;
             deactiveSprite = RedKnight;
         }
-        else
-        {
+        else if (tag == "Player2") {
             activeSprite = BlueKnight_H;
             deactiveSprite = BlueKnight;
         }

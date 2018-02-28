@@ -19,7 +19,7 @@ public class King : Pawn {
             activeSprite = RedKing_H;
             deactiveSprite = RedKing;
         }
-        else
+        else if (tag == "Player2")
         {
             activeSprite = BlueKing_H;
             deactiveSprite = BlueKing;

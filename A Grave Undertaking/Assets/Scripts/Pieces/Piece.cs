@@ -15,6 +15,9 @@ public class Piece : MonoBehaviour {
     void Start()
     {
         UpdateCoordinates();
+        if (tag == "UnitPanelBoard") {
+            turnIsOver = false;
+        }
     }
 
     void UpdateCoordinates()

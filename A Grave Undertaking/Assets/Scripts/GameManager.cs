@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour {
 
@@ -177,6 +178,10 @@ public class GameManager : MonoBehaviour {
 
     void AddUnitToUnitPanel(Transform child) {
         var clone = Instantiate(child.gameObject);
+        var childPiece = child.GetComponent<Piece>();
+        clone.GetComponent<Piece>().activeSprite = childPiece.activeSprite;
+        clone.GetComponent<Piece>().deactiveSprite = childPiece.deactiveSprite;
+        clone.GetComponent<Piece>().turnIsOver = childPiece.turnIsOver;
         clone.tag = "UnitPanelPiece";
         panelToBoardPiece.Add(clone, child.gameObject);
         clone.transform.SetParent(UnitPanel.transform);

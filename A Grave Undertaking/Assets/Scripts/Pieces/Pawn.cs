@@ -20,8 +20,7 @@ public class Pawn : Piece {
             activeSprite = RedPawn_H;
             deactiveSprite = RedPawn;
         }
-        else
-        {
+        else if (tag == "Player2") {
             activeSprite = BluePawn_H;
             deactiveSprite = BluePawn;
         }
