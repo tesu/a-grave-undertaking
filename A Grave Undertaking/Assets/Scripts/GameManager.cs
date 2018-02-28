@@ -572,19 +572,17 @@ public class GameManager : MonoBehaviour {
             piece.GetComponent<Piece>().turnIsOver = true;
         }
 
-        TurnText.text = "<color=white><size=" + TextFontSize + ">Player " + player + "'s Turn" + "</size></color>";
+        TurnText.text = "<color=white><size=" + TextFontSize + ">" + ( player == 1 ? "Red" : "Blue" ) + " Player's Turn" + "</size></color>";
     }
     public void PlayerWinsState(string currentPlayer, string reason)
     {
         if(reason == "Bomb")
         {
             GameOverText.text = "Your King has died to a bomb. " + currentPlayer + " wins!";
-            Debug.Log("Your King has died to a bomb. " + currentPlayer + " wins!");
         }
         else
         {
             GameOverText.text = "The enemy King has fallen. " + currentPlayer + " wins!";
-            Debug.Log("The enemy King has fallen. " + currentPlayer + " wins!");
         }
         EndGamePanel.SetActive(true);  
     }
