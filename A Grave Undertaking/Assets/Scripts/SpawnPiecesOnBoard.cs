@@ -16,6 +16,27 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
     public GameObject Bishop;
     public GameObject DeadBody;
 
+    public Sprite RedKing;
+    public Sprite RedPawn;
+    public Sprite RedKnight;
+    public Sprite RedBishop;
+
+    public Sprite RedKing_H;
+    public Sprite RedPawn_H;
+    public Sprite RedKnight_H;
+    public Sprite RedBishop_H;
+
+    public Sprite BlueKing;
+    public Sprite BluePawn;
+    public Sprite BlueKnight;
+    public Sprite BlueBishop;
+
+    public Sprite BlueKing_H;
+    public Sprite BluePawn_H;
+    public Sprite BlueKnight_H;
+    public Sprite BlueBishop_H;
+
+
     public Transform oldPiece; // for upgrading
     enum PlayerTag { Player1, Player2, Neutral };
 
@@ -30,12 +51,9 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         SpawnPiece(8, 7, Pawn, "Player2");
         SpawnPiece(7, 8, Pawn, "Player2");
         SpawnPiece(8, 8, King, "Player2");
-        SpawnPiece(6, 7, Knight, "Player2");
-        SpawnPiece(4, 5, Bishop, "Player2");
         AssignColorsByTag();
     }
 
-    // This will have a third argument with the type of piece to spawn
     void SpawnPiece(int xCoord, int yCoord, GameObject piece, string PlayerTag)
     {
         Debug.Log(piece);
@@ -44,10 +62,6 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         newPiece.tag = PlayerTag;
         newPiece.GetComponent<Piece>().xCoord = xCoord;
         newPiece.GetComponent<Piece>().yCoord = yCoord;
-        if (newPiece.tag == "Player2")
-        {
-            newPiece.GetComponent<Image>().color = Color.blue;
-        }
     }
 
     public void action_Upgrade()
@@ -81,7 +95,7 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         GameObject[] player2pieces = GameObject.FindGameObjectsWithTag("Player2");
         foreach(GameObject piece in player2pieces)
         {
-            piece.GetComponent<Image>().color = Color.blue;
+            //piece.GetComponent<Image>().sprite = ;
         }
     }
 
@@ -89,7 +103,9 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
     {
         GameObject newPiece = Instantiate(upgradedPiece, oldPiece.parent);
         newPiece.tag = oldPiece.tag;
-        if(newPiece.tag == "Player2")
+        newPiece.GetComponent<Piece>().xCoord = oldPiece.GetComponent<Piece>().xCoord;
+        newPiece.GetComponent<Piece>().yCoord = oldPiece.GetComponent<Piece>().yCoord;
+        if (newPiece.tag == "Player2")
         {
             newPiece.GetComponent<Image>().color = Color.blue;
         }

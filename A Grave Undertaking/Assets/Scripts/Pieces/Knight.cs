@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class Knight : Piece {
 
-	void Start ()
+    public Sprite RedKnight;
+    public Sprite RedKnight_H;
+    public Sprite BlueKnight;
+    public Sprite BlueKnight_H;
+
+    void Start ()
     {
         canResurrect = false;
         turnIsOver = true;
+        if (this.tag == "Player1")
+        {
+            activeSprite = RedKnight_H;
+            deactiveSprite = RedKnight;
+        }
+        else
+        {
+            activeSprite = BlueKnight_H;
+            deactiveSprite = BlueKnight;
+        }
     }
 }

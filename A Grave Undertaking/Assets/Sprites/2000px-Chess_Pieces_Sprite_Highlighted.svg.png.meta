@@ -1,0 +1,358 @@
+fileFormatVersion: 2
+guid: cd6cf0b8bc840fe458b1dff6b49b9375
+timeCreated: 1519677798
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: 2000px-Chess_Pieces_Sprite.svg_0
+    21300002: 2000px-Chess_Pieces_Sprite.svg_1
+    21300004: 2000px-Chess_Pieces_Sprite.svg_2
+    21300006: 2000px-Chess_Pieces_Sprite.svg_3
+    21300008: 2000px-Chess_Pieces_Sprite.svg_4
+    21300010: 2000px-Chess_Pieces_Sprite.svg_5
+    21300012: 2000px-Chess_Pieces_Sprite.svg_6
+    21300014: 2000px-Chess_Pieces_Sprite.svg_7
+    21300016: 2000px-Chess_Pieces_Sprite.svg_8
+    21300018: 2000px-Chess_Pieces_Sprite.svg_9
+    21300020: 2000px-Chess_Pieces_Sprite.svg_10
+    21300022: 2000px-Chess_Pieces_Sprite.svg_11
+    21300024: 2000px-Chess_Pieces_Sprite.svg_12
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 333.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -44.280212, y: 143.30463}
+        - {x: -148.23137, y: 50.12213}
+        - {x: -148.23137, y: -49.268616}
+        - {x: -100.56042, y: -146.30463}
+        - {x: 91.13368, y: -146.30463}
+        - {x: 145.75581, y: -38.82904}
+        - {x: 145.75581, y: 51.17096}
+        - {x: 35.524414, y: 143.30463}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_1
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 333.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -14.110504, y: 159.58484}
+        - {x: -145.36505, y: 131.97559}
+        - {x: -164.18253, y: 82.24292}
+        - {x: -110.853455, y: -146.2558}
+        - {x: 105.7558, y: -147.73138}
+        - {x: 152.37787, y: 10.695374}
+        - {x: 161.23138, y: 123.682495}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_2
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 333.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -53.195374, y: 153.68256}
+        - {x: -156.56042, y: -149.15811}
+        - {x: 153.13367, y: -146.20694}
+        - {x: 69.37793, y: 150.73138}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_3
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 333.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -74.62219, y: 145.63373}
+        - {x: -130, y: 80.5}
+        - {x: -155.08484, y: -44.42798}
+        - {x: -94.29309, y: -145.73138}
+        - {x: 146.13367, y: -151.63367}
+        - {x: 134.75574, y: 40.890747}
+        - {x: 24.097656, y: 142.6825}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_4
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 333.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 119.401, y: 126.20691}
+        - {x: -110.70691, y: 126.20697}
+        - {x: -127.65808, y: -147.20694}
+        - {x: 128.1825, y: -150.15811}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_5
+      rect:
+        serializedVersion: 2
+        x: 1665
+        y: 333.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -37.04883, y: 130.63373}
+        - {x: -129.93835, y: -148.2558}
+        - {x: 119.03601, y: -149.73138}
+        - {x: 39.902344, y: 129.15814}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -71.964, y: 158.53601}
+        - {x: -151.18253, y: 73.75705}
+        - {x: -152.65811, y: -51.926735}
+        - {x: -90.28021, y: -144.82906}
+        - {x: 73.95116, y: -147.78021}
+        - {x: 132.47557, y: -77.20695}
+        - {x: 153.13371, y: 46.451157}
+        - {x: 71.86633, y: 158.53601}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_7
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 0.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 71.146484, y: 154.48715}
+        - {x: -30.658112, y: 157.06042}
+        - {x: -136.02316, y: 131.97559}
+        - {x: -159.7558, y: 107.82904}
+        - {x: -131.28021, y: -141.78021}
+        - {x: 119.609314, y: -143.40231}
+        - {x: 164.1825, y: 120.14526}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_8
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 0.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 106.938354, y: 46.926743}
+        - {x: 37.67096, y: 156.6337}
+        - {x: -34.2442, y: 158.10925}
+        - {x: -119.67096, y: 37.816208}
+        - {x: -149.18256, y: -134.40231}
+        - {x: 156.08484, y: -131.8779}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_9
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 0.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -71.6709, y: 150.06042}
+        - {x: -153.60925, y: -5.4743195}
+        - {x: -128.52441, y: -82.060425}
+        - {x: -74.3291, y: -139.35349}
+        - {x: 143.1825, y: -137.8779}
+        - {x: 129.90222, y: 61.402313}
+        - {x: 57.62207, y: 136.78021}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_10
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 0.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 113.13367, y: 135.06042}
+        - {x: -117.3291, y: 136.53601}
+        - {x: -121.75574, y: -134.92674}
+        - {x: 123.75574, y: -137.8779}
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: 2000px-Chess_Pieces_Sprite.svg_11
+      rect:
+        serializedVersion: 2
+        x: 1665
+        y: 0.5
+        width: 333.33334
+        height: 333.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -51.95117, y: 139.81622}
+        - {x: -122.560425, y: -142.35347}
+        - {x: 119.03601, y: -137.92674}
+        - {x: 40.426758, y: 138.86505}
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

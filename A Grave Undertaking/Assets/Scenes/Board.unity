@@ -1626,6 +1626,22 @@ MonoBehaviour:
   Knight: {fileID: 1901647981631510, guid: 44db7e27b55218d44819125d222f7814, type: 2}
   Bishop: {fileID: 1901647981631510, guid: 7840f6e32438e0041b8287f539f16d9b, type: 2}
   DeadBody: {fileID: 1905577914170456, guid: 9982085f9a898214094cea7e758ea153, type: 2}
+  RedKing: {fileID: 21300012, guid: d9668d50407b1684dadc50bfaef24ea8, type: 3}
+  RedPawn: {fileID: 21300022, guid: d9668d50407b1684dadc50bfaef24ea8, type: 3}
+  RedKnight: {fileID: 21300018, guid: d9668d50407b1684dadc50bfaef24ea8, type: 3}
+  RedBishop: {fileID: 21300016, guid: d9668d50407b1684dadc50bfaef24ea8, type: 3}
+  RedKing_H: {fileID: 21300012, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
+  RedPawn_H: {fileID: 21300022, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
+  RedKnight_H: {fileID: 21300018, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
+  RedBishop_H: {fileID: 21300016, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
+  BlueKing: {fileID: 21300000, guid: d9668d50407b1684dadc50bfaef24ea8, type: 3}
+  BluePawn: {fileID: 21300010, guid: d9668d50407b1684dadc50bfaef24ea8, type: 3}
+  BlueKnight: {fileID: 21300006, guid: d9668d50407b1684dadc50bfaef24ea8, type: 3}
+  BlueBishop: {fileID: 21300004, guid: d9668d50407b1684dadc50bfaef24ea8, type: 3}
+  BlueKing_H: {fileID: 21300000, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
+  BluePawn_H: {fileID: 21300010, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
+  BlueKnight_H: {fileID: 21300006, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
+  BlueBishop_H: {fileID: 21300004, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
   oldPiece: {fileID: 0}
 --- !u!1 &1466585917
 GameObject:
