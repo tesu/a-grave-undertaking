@@ -8,6 +8,8 @@ TagManager:
   - Player1
   - Player2
   - Neutral
+  - UnitPanelPiece
+  - Button
   layers:
   - Default
   - TransparentFX

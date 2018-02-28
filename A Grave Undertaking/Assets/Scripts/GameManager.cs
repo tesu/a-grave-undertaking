@@ -21,8 +21,8 @@ public class GameManager : MonoBehaviour {
     public Text InfoText;
     public Text GameOverText;
     public int TextFontSize;
-    public Button AttackButton;
-    public Button MoveButton;
+    public Button UpgradeButton;
+    public Button RezButton;
     public Button DigButton;
     public Button FinishButton;
     public bool Player1Turn;
@@ -33,9 +33,9 @@ public class GameManager : MonoBehaviour {
     private int boardSize = StaticVariables.BoardSize;
     private GameObject highlightedCell;
     private GameObject selectedCell;
+    private Dictionary<GameObject, GameObject> panelToBoardPiece = new Dictionary<GameObject, GameObject>();
     private bool gameStarted = false;
-    
-    private bool clicked;
+    private bool insistsToFinish = false;
 
 	// Use this for initialization
 	void Start () {
@@ -46,12 +46,25 @@ public class GameManager : MonoBehaviour {
     void Update() {
         if (!gameStarted)
             return;
+        if (ReadyToFinish()) {
+            FinishButton.GetComponent<Image>().color = Color.green;
+        }
+
+        //SetButtonInteractions();
 
         List<RaycastResult> raycastResults = raycaster.GetAllRaycastObjects();
         GameObject resultCell = null;
+        GameObject resultPiece = null;
+        GameObject resultButton = null;
         foreach (RaycastResult result in raycastResults) {
             if (result.gameObject.tag == "Cell") {
                 resultCell = result.gameObject;
+            }
+            if (result.gameObject.tag == "UnitPanelPiece") {
+                resultPiece = result.gameObject;
+            }
+            if (result.gameObject.tag == "Button") {
+                resultButton = result.gameObject;
             }
         }
 
@@ -66,8 +79,8 @@ public class GameManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             if (highlightedCell != null) {
-                clicked = true;
                 DeHighlightCell(true);
+                ClearUnitPanel();
                 selectedCell = highlightedCell;
                 string info = (board.GetCellX(highlightedCell) + 1) + ", " + (board.GetCellY(highlightedCell) + 1);
                 Debug.Log(info);
@@ -82,7 +95,7 @@ public class GameManager : MonoBehaviour {
                         selectedPiece.GetComponent<Piece>().yCoord = board.GetCellY(highlightedCell) + 1;
                         selectedPiece.GetComponent<Piece>().turnIsOver = true;
                         // This is an attack
-                        if(highlightedCell.transform.GetChild(0).tag != selectedPiece.tag)
+                        if(highlightedCell.transform.GetChild(0).tag == "Player" + (Player1Turn ? 2 : 1))
                         {
                             if(highlightedCell.transform.GetChild(0).name == "King(Clone)")
                             {
@@ -116,7 +129,8 @@ public class GameManager : MonoBehaviour {
                     }
                     // This assumes 1 child for now for simplicity
                     // Neutral pieces cannot be selected
-                    if (highlightedCell.transform.GetChild(0).tag != "Neutral")
+                    
+                    if (highlightedCell.transform.childCount == 1 && highlightedCell.transform.GetChild(0).tag != "Neutral")
                     {
                         if(highlightedCell.transform.GetChild(0).GetComponent<Piece>().turnIsOver)
                         {
@@ -127,28 +141,44 @@ public class GameManager : MonoBehaviour {
                             selectedPiece = highlightedCell.transform.GetChild(0);
                             CalculateLegalMoves(selectedPiece);
                         }               
-                    }                 
+                    }        
+                    
                 }
             }
             else {
-                DeHighlightCell(true);
-                ClearHighlights();
-                legalTiles.Clear();
-                selectedPiece = null;
-                selectedCell = null;
-                Debug.Log("No Cell");
+                if (resultPiece != null && panelToBoardPiece[resultPiece].tag == "Player" + (Player1Turn ? 1 : 2)) {
+                    selectedPiece = panelToBoardPiece[resultPiece].transform;
+                    CalculateLegalMoves(selectedPiece);
+                }
+                else if (resultButton == null) {
+                    DeHighlightCell(true);
+                    ClearHighlights();
+                    legalTiles.Clear();
+                    selectedPiece = null;
+                    selectedCell = null;
+                    Debug.Log("No Cell");
+                }
             }
-        }
-
-        if (Input.GetKeyUp(KeyCode.Mouse0)) {
-            clicked = false;
         }
 
         HighlightCell();
     }
 
+    bool ReadyToFinish() {
+        if (insistsToFinish)
+            return true;
+        foreach (Piece piece in FindObjectsOfType<Piece>()) {
+            if (!piece.turnIsOver) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     void AddUnitToUnitPanel(Transform child) {
         var clone = Instantiate(child.gameObject);
+        clone.tag = "UnitPanelPiece";
+        panelToBoardPiece.Add(clone, child.gameObject);
         clone.transform.SetParent(UnitPanel.transform);
     }
 
@@ -156,6 +186,7 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < UnitPanel.transform.childCount; i++) {
             Destroy(UnitPanel.transform.GetChild(i).gameObject);
         }
+        panelToBoardPiece.Clear();
     }
 
     void CalculateLegalMoves(Transform selectedPiece)
@@ -434,7 +465,14 @@ public class GameManager : MonoBehaviour {
     }
 
     public void OnFinishButtonClick() {
+        if (gameStarted && !ReadyToFinish()) {
+            SetInfoText("Some pieces haven't moved. Press Finish again if you want to continue anyway.");
+            insistsToFinish = true;
+            return;
+        }
         gameStarted = true;
+        insistsToFinish = false;
+        FinishButton.GetComponent<Image>().color = Color.white;
         Player1Turn = !Player1Turn;
         selectedPiece = null;
         SetTurnText();
@@ -466,6 +504,25 @@ public class GameManager : MonoBehaviour {
         }
         if (selectedCell != null) {
             selectedCell.GetComponent<Image>().color = ClickedColor;
+        }
+    }
+
+    void SetButtonInteractions() {
+        if (selectedPiece != null) {
+            DigButton.interactable = true;
+            if (selectedPiece.GetComponent<Piece>().canResurrect) {
+                RezButton.interactable = true;
+                UpgradeButton.interactable = false;
+            }
+            else {
+                UpgradeButton.interactable = true;
+                RezButton.interactable = false;
+            }
+        }
+        else {
+            DigButton.interactable = false;
+            UpgradeButton.interactable = false;
+            RezButton.interactable = false;
         }
     }
 

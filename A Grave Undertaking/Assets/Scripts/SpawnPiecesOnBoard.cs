@@ -54,7 +54,7 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         AssignColorsByTag();
     }
 
-    void SpawnPiece(int xCoord, int yCoord, GameObject piece, string PlayerTag)
+    GameObject SpawnPiece(int xCoord, int yCoord, GameObject piece, string PlayerTag)
     {
         Debug.Log(piece);
         GameObject spawnInCell = board.GetCell(xCoord - 1, yCoord - 1);
@@ -62,6 +62,7 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         newPiece.tag = PlayerTag;
         newPiece.GetComponent<Piece>().xCoord = xCoord;
         newPiece.GetComponent<Piece>().yCoord = yCoord;
+        return newPiece;
     }
 
     public void action_Upgrade()
@@ -141,6 +142,11 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
                 {
                     gameManager.GetComponent<GameManager>().SetInfoText("You resurrected at " + (x+1) + ", " + (y+1));
                     SpawnPiece(x+1, y+1, Pawn, gameManager.GetComponent<GameManager>().Player1Turn ? "Player1" : "Player2");
+                    for (int k = 0; k < board.GetCell(piece.xCoord - 1, piece.yCoord - 1).transform.childCount; k++) {
+                        if (board.GetCell(piece.xCoord - 1, piece.yCoord - 1).transform.GetChild(k).gameObject.tag == "Neutral") {
+                            Destroy(board.GetCell(piece.xCoord - 1, piece.yCoord - 1).transform.GetChild(k).gameObject);
+                        }
+                    }
                     found = true;
                     break;
                 }
@@ -189,6 +195,7 @@ public class SpawnPiecesOnBoard : MonoBehaviour {
         }
         else if (cell.hidden == Cell.hiddenValue.Body)
         {
+            var dead = Instantiate(DeadBody, board.GetCell(piece.xCoord - 1, piece.yCoord - 1).transform);
             gameManager.GetComponent<GameManager>().SetInfoText("You dug up a body that you can resurrect.");
         }
 
