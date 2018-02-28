@@ -79,9 +79,9 @@ MonoBehaviour:
   BluePawn: {fileID: 0}
   BluePawn_H: {fileID: 0}
   RedBishop: {fileID: 21300016, guid: d9668d50407b1684dadc50bfaef24ea8, type: 3}
-  RedBishop_H: {fileID: 21300004, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
+  RedBishop_H: {fileID: 21300016, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
   BlueBishop: {fileID: 21300004, guid: d9668d50407b1684dadc50bfaef24ea8, type: 3}
-  BlueBishop_H: {fileID: 21300016, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
+  BlueBishop_H: {fileID: 21300004, guid: cd6cf0b8bc840fe458b1dff6b49b9375, type: 3}
 --- !u!222 &222747156962718732
 CanvasRenderer:
   m_ObjectHideFlags: 1
